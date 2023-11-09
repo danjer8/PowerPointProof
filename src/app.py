@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import os
+from analysis import perform_analysis
 
 # Annahme: Du hast bereits eine Funktion, die die Analyse durchführt.
 # from analysis import perform_analysis
@@ -26,14 +27,9 @@ def allowed_file(filename):
 def your_analysis_function(filepath):
     # Hier käme deine Logik zur Analyse der PowerPoint-Datei
     # Für die Demonstration geben wir einfach statische Werte zurück
-    analysis_result = {
-        'slide_count': 10,  # Beispielwert
-        'feedback': [
-            'Slide 1: Zu viel Text',
-            'Slide 3: Füge ein Bild hinzu',
-            # ...
-        ]
-    }
+    print(f"------------Analyzing file {filepath}------------")
+    analysis_result = perform_analysis(filepath)
+    print(f"----------------Analysis result: {analysis_result}----------------")
     return analysis_result
 
 @app.route('/api/upload', methods=['POST'])
